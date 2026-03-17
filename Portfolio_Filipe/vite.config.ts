@@ -3,15 +3,12 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: '/Portifolio-Filipe/',  // Mantenha assim
+  // Tente sem a barra no final
+  base: '/Portifolio-Filipe',
   server: {
     host: "::",
     port: 8080,
-    hmr: {
-      overlay: false,
-    },
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
@@ -22,8 +19,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: false,
-    // Garantir que os assets sejam referenciados corretamente
+    // FORÇAR caminhos relativos
     rollupOptions: {
       output: {
         assetFileNames: 'assets/[name]-[hash][extname]',
